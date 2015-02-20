@@ -429,14 +429,14 @@ def build_header(
 
     if is_token(filename):
         rv += '; filename=%s' % (filename, )
-        return rv
+        return rv.encode('iso-8859-1')
     elif is_ascii(filename) and is_lws_safe(filename):
         qd_filename = qd_quote(filename)
         rv += '; filename="%s"' % (qd_filename, )
         if qd_filename == filename:
             # RFC 6266 claims some implementations are iffy on qdtext's
             # backslash-escaping, we'll include filename* in that case.
-            return rv
+            return rv.encode('iso-8859-1')
     elif filename_compat:
         if is_token(filename_compat):
             rv += '; filename=%s' % (filename_compat, )
