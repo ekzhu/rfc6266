@@ -80,7 +80,6 @@ def test_relaxed():
     assert cd.filename_unsafe == u'spa ced'
 
 
-
 def test_roundtrip():
     def roundtrip(filename):
         return parse_headers(build_header(filename)).filename_unsafe
@@ -95,3 +94,10 @@ def test_roundtrip():
     assert_roundtrip('a\"b')
     assert_roundtrip(u'aéio   o♥u"qfsdf!')
 
+
+def test_test_roundtrip():
+    assert (build_header("test.txt", disposition='form-data', name="test1")
+            == 'form-data; name=test1; filename=test.txt')
+
+    assert (build_header(u"тест.txt", disposition='form-data', name="test2")
+            == "form-data; name=test2; filename*=utf-8''%D1%82%D0%B5%D1%81%D1%82.txt")
