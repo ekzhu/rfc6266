@@ -396,7 +396,8 @@ def qd_quote(text):
 
 
 def build_header(
-    filename, disposition='attachment', filename_compat=None
+    filename, disposition='attachment', filename_compat=None,
+    **keys
 ):
     """Generate a Content-Disposition header for a given filename.
 
@@ -427,6 +428,9 @@ def build_header(
 
     rv = disposition
 
+    for key in keys:
+        rv += '; {}={}'.format(key, keys[key])
+
     if is_token(filename):
         rv += '; filename=%s' % (filename, )
         return rv
@@ -451,4 +455,3 @@ def build_header(
 
     # This will only encode filename_compat, if it used non-ascii iso-8859-1.
     return rv.encode('iso-8859-1')
-
