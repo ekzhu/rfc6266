@@ -183,11 +183,11 @@ def parse_headers(content_disposition, location=None, relaxed=False):
         return ContentDisposition(location=location)
 
     # Both alternatives seem valid.
-    if False:
+    #if False:
         # Require content_disposition to be ascii bytes (0-127),
         # or characters in the ascii range
-        content_disposition = ensure_charset(content_disposition, 'ascii')
-    else:
+        #content_disposition = ensure_charset(content_disposition, 'ascii')
+    #else:
         # We allow non-ascii here (it will only be parsed inside of
         # qdtext, and rejected by the grammar if it appears in
         # other places), although parsing it can be ambiguous.
@@ -195,7 +195,7 @@ def parse_headers(content_disposition, location=None, relaxed=False):
         # won't get dismissed because of an unrelated ambiguity
         # in the filename parameter. But it does mean we occasionally
         # give less-than-certain values for some legacy senders.
-        content_disposition = ensure_charset(content_disposition, 'iso-8859-1')
+        #content_disposition = ensure_charset(content_disposition, 'iso-8859-1')
 
     # Check the caller already did LWS-folding (normally done
     # when separating header names and values; RFC 2616 section 2.2
@@ -433,14 +433,14 @@ def build_header(
 
     if is_token(filename):
         rv += '; filename=%s' % (filename, )
-        return rv
+        return rv.encode('iso-8859-1')
     elif is_ascii(filename) and is_lws_safe(filename):
         qd_filename = qd_quote(filename)
         rv += '; filename="%s"' % (qd_filename, )
         if qd_filename == filename:
             # RFC 6266 claims some implementations are iffy on qdtext's
             # backslash-escaping, we'll include filename* in that case.
-            return rv
+            return rv.encode('iso-8859-1')
     elif filename_compat:
         if is_token(filename_compat):
             rv += '; filename=%s' % (filename_compat, )

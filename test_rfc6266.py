@@ -14,8 +14,8 @@ def test_parsing():
         'attachment; filename=simple').filename_unsafe == 'simple'
 
     # test ISO-8859-1
-    fname = parse_headers(u'attachment; filename="oyé"').filename_unsafe
-    assert fname == u'oyé', repr(fname)
+    fname = parse_headers('attachment; filename="oyé"').filename_unsafe
+    assert fname == 'oyé', repr(fname)
 
     cd = parse_headers(
         'attachment; filename="EURO rates";'
