@@ -2,13 +2,13 @@
 from setuptools import setup
 
 setup(
-    author='Gabriel de Perthuis',
+    author='Gabriel de Perthuis, ekzhu',
     author_email='g2p.code+rfc6266@gmail.com',
-    description='Parse and generate Content-Disposition headers',
-    url='https://github.com/g2p/rfc6266',
+    description='Parse and generate Content-Disposition headers (a fork maintained by ekzhu)',
+    url='https://github.com/ekzhu/rfc6266',
     keywords='rfc6266 Content-Disposition http attachments',
-    name='rfc6266',
-    version='0.0.6.op1',  # semver
+    name='rfc6266-content-disposition',
+    version='0.0.6',  # semver
     license='GNU LGPL',
     platforms='OS-independent',
     py_modules=['rfc6266', 'test_rfc6266'],
